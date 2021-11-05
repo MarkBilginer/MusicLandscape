@@ -99,7 +99,7 @@ public class DurationMatcher extends MyMatcher<Track> {
             }
         } else {
             // there are no matches
-            System.out.println("Invalid pattern provided in setPattern() in DurationMatcher!");
+            System.out.println( "\t+" + "Invalid pattern provided in setPattern() in DurationMatcher!");
         }
     }
 

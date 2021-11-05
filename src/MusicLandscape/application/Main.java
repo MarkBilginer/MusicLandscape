@@ -13,8 +13,7 @@ import MusicLandscape.util.io.MyTrackCSVReader;
 import MusicLandscape.util.io.MyTrackXMLReader;
 import MusicLandscape.util.io.MyWriter;
 import MusicLandscape.util.io.MyXMLWriter;
-import MusicLandscape.util.matcher.DurationMatcher;
-import MusicLandscape.util.matcher.TitleMatcher;
+import MusicLandscape.util.matcher.*;
 
 import java.io.*;
 import java.util.Comparator;
@@ -44,7 +43,10 @@ public class Main {
         comparators.add(new YearComparator());
 
         matchers.add(placeboMatcher);
+        matchers.add(new WriterMatcher());
+        matchers.add(new PerformerMatcher());
         matchers.add(new DurationMatcher());
+        matchers.add(new YearMatcher());
 
         formatters.add(theFormat = new LongTrackFormatter());
         formatters.add(new ShortTrackFormatter());
@@ -65,13 +67,17 @@ public class Main {
 
             // get choice
             System.out.print(": ");
-            int input = Integer.parseInt(sc.nextLine());
-            if (menu.execute(input))
-                continue;
+            try {
+                int input = Integer.parseInt(sc.nextLine());
+                if (menu.execute(input))
+                    continue;
 
-            System.out.print("exit? (1=yes)");
-            if (Integer.parseInt(sc.nextLine()) == 1)
-                break;
+                System.out.print("exit? (1=yes)");
+                if (Integer.parseInt(sc.nextLine()) == 1)
+                    break;
+            } catch (NumberFormatException e) {
+                System.out.println("\t" + " You need to enter a number.");
+            }
         }
 
         System.out.println(GOOD_BYE_TEXT);
@@ -224,11 +230,11 @@ public class Main {
                                 System.out.println("\t" + counter + " track/s written.");
                                 my_writer.close();
                             } catch (IOException e) {
-                                e.printStackTrace();
-                                System.out.println(e.getMessage());
+                                //e.printStackTrace();
+                                System.out.println("\t" + e.getMessage());
                             } catch (IllegalArgumentException e) {
-                                e.printStackTrace();
-                                System.out.println(e.getMessage());
+                                //e.printStackTrace();
+                                System.out.println("\t" + e.getMessage());
 
                             }
                         }
@@ -251,11 +257,11 @@ public class Main {
                                 System.out.println("\t" + nrTracks + " track/s written.");
                                 xml_writer.close();
                             } catch (IOException e) {
-                                e.printStackTrace();
-                                System.out.println(e.getMessage());
+                                //e.printStackTrace();
+                                System.out.println("\t" + e.getMessage());
                             } catch (IllegalArgumentException e) {
-                                e.printStackTrace();
-                                System.out.println(e.getMessage());
+                                //e.printStackTrace();
+                                System.out.println("\t" + e.getMessage());
 
                             }
                         }
@@ -288,8 +294,8 @@ public class Main {
                                 System.out.println("\t You need to enter a filename.");
                             }
                         } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                            System.err.println(e.getMessage());
+                            //e.printStackTrace();
+                            System.err.println("\t" + e.getMessage());
                             System.out.println(String.format("\t" + "Error: cannot open file (%s).", file_name));
                         }
                     }
@@ -321,8 +327,8 @@ public class Main {
                                 System.out.println("\t You need to enter a filename.");
                             }
                         } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                            System.err.println(e.getMessage());
+                            //e.printStackTrace();
+                            System.err.println("\t" + e.getMessage());
                             System.out.println(String.format("\t" + "Error: cannot open file (%s).", file_name));
                         }
                     }

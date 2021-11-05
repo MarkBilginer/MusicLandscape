@@ -1,5 +1,6 @@
 package MusicLandscape.entities;
 
+import MusicLandscape.application.Main;
 import MusicLandscape.util.ConsoleScanable;
 
 import java.util.Scanner;
@@ -283,14 +284,15 @@ public class Track implements ConsoleScanable, Comparable<Track> {
 
         System.out.println(String.format("\t" + "Field name is \"title\" and value is %s", this.title));
         System.out.println("\t" + "Enter new value for title (old value can be kept by entering empty string): ");
-        String valid_title;
-        while (!validateTitle(valid_title = sc.nextLine())) {
-            System.out.println("\t" + "Invalid value for title, please try again: ");
-        }
-        if (!valid_title.equals("")) {
-            setTitle(valid_title);
-            field_changed = true;
-        }
+        try {
+            String valid_title;
+            while (!validateTitle(valid_title = sc.nextLine())) {
+                System.out.println("\t" + "Invalid value for title, please try again: ");
+            }
+            if (!valid_title.equals("")) {
+                setTitle(valid_title);
+                field_changed = true;
+            }
 
 //        System.out.println(String.format("Field name is \"Writer\" and value is %s", this.getWriter().toString()));
 //        System.out.println("Enter new value for Writer (old value can be kept by entering empty string): ");
@@ -311,16 +313,16 @@ public class Track implements ConsoleScanable, Comparable<Track> {
 //            field_changed = true;
 //        }
 
-        System.out.println(String.format("\t" + "Field name is \"duration\" and value is %d", this.getDuration()));
-        System.out.println("\t" + "Enter new value for duration (old value can be kept by entering empty string): ");
-        String valid_duration;
-        while (!"".equals(valid_duration = sc.nextLine()) && !validateDuration(Integer.parseInt(valid_duration))) {
-            System.out.println("\t" + "Invalid value for duration, please try again: ");
-        }
-        if (!"".equals(valid_duration)) {
-            setDuration(Integer.parseInt(valid_duration));
-            field_changed = true;
-        }
+            System.out.println(String.format("\t" + "Field name is \"duration\" and value is %d", this.getDuration()));
+            System.out.println("\t" + "Enter new value for duration (old value can be kept by entering empty string): ");
+            String valid_duration;
+            while (!"".equals(valid_duration = sc.nextLine()) && !validateDuration(Integer.parseInt(valid_duration))) {
+                System.out.println("\t" + "Invalid value for duration, please try again: ");
+            }
+            if (!"".equals(valid_duration)) {
+                setDuration(Integer.parseInt(valid_duration));
+                field_changed = true;
+            }
 
 //        System.out.println(String.format("Field name is \"year\" and value is %d", this.getYear()));
 //        System.out.println("Enter new value for year (old value can be kept by entering empty string): ");
@@ -334,6 +336,11 @@ public class Track implements ConsoleScanable, Comparable<Track> {
 //        }
 
 //        sc.close(); // scanner stream is closed in main application
+        } catch (NumberFormatException e) {
+            System.out.println("\t" + "You need to enter a number. " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("\t" + e.getMessage());
+        }
         return field_changed;
     }
 

@@ -281,11 +281,11 @@ public class Track implements ConsoleScanable, Comparable<Track> {
         boolean field_changed = false;
         Scanner sc = new Scanner(System.in);
 
-        System.out.println(String.format("Field name is \"title\" and value is %s", this.title));
-        System.out.println("Enter new value for title (old value can be kept by entering empty string): ");
+        System.out.println(String.format("\t" + "Field name is \"title\" and value is %s", this.title));
+        System.out.println("\t" + "Enter new value for title (old value can be kept by entering empty string): ");
         String valid_title;
         while (!validateTitle(valid_title = sc.nextLine())) {
-            System.out.println("Invalid value for title, please try again: ");
+            System.out.println("\t" + "Invalid value for title, please try again: ");
         }
         if (!valid_title.equals("")) {
             setTitle(valid_title);
@@ -311,11 +311,11 @@ public class Track implements ConsoleScanable, Comparable<Track> {
 //            field_changed = true;
 //        }
 
-        System.out.println(String.format("Field name is \"duration\" and value is %d", this.getDuration()));
-        System.out.println("Enter new value for duration (old value can be kept by entering empty string): ");
+        System.out.println(String.format("\t" + "Field name is \"duration\" and value is %d", this.getDuration()));
+        System.out.println("\t" + "Enter new value for duration (old value can be kept by entering empty string): ");
         String valid_duration;
         while (!"".equals(valid_duration = sc.nextLine()) && !validateDuration(Integer.parseInt(valid_duration))) {
-            System.out.println("Invalid value for duration, please try again: ");
+            System.out.println("\t" + "Invalid value for duration, please try again: ");
         }
         if (!"".equals(valid_duration)) {
             setDuration(Integer.parseInt(valid_duration));

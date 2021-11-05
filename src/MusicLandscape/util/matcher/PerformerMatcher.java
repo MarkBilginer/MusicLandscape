@@ -67,6 +67,6 @@ public class PerformerMatcher extends MyMatcher<Track> {
      */
     @Override
     public String toString() {
-        return "The name of the Performer starts with (" + this.getPattern() + ")";
+        return "The name of the performer starts with (" + this.getPattern() + ")";
     }
 }

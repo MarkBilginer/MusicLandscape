@@ -95,7 +95,7 @@ public class YearMatcher extends MyMatcher<Track> {
                     this.upper = MAX_YEAR;
                 }
             }
-            System.out.println("\t" + String.format("Year filter is set to show all tracks between %d-%d.", this.lower, this.upper));
+            //System.out.println("\t" + String.format("Year filter is set to show all tracks between %d-%d.", this.lower, this.upper));
         } else {
             // there are no matches
             System.out.println( "\t+" + "Invalid pattern provided in setPattern() in DurationMatcher!");

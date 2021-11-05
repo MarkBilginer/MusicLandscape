@@ -176,7 +176,7 @@ public class Main {
                             Main.this.placeboMatcher = Main.this.matchers.get(input_choice);
                             Main.this.placeboMatcher.setPattern(input_pattern);
                             System.out.println("\t" + Main.this.placeboMatcher.toString()
-                                    + " filter applied (" + Main.this.db.filter(Main.this.placeboMatcher) + "record/s filtered).");
+                                    + " filter applied (" + Main.this.db.filter(Main.this.placeboMatcher) + " record/s filtered).");
                         } else {
                             System.out.println("\t" + "Invalid choice of filtering.");
                             System.out.println("\t" + "You are back in Main Menu.");
@@ -189,6 +189,15 @@ public class Main {
                     @Override
                     void execute() {
                         Main.this.db.reset();
+                        for (MyMatcher<Track> matcher: Main.this.matchers) {
+                            if(matcher instanceof TitleMatcher || matcher instanceof WriterMatcher || matcher instanceof PerformerMatcher) {
+                                matcher.setPattern("");
+                            } else if (matcher instanceof DurationMatcher) {
+                                matcher.setPattern("0 " + Integer.MAX_VALUE);
+                            } else if (matcher instanceof YearMatcher) {
+                                matcher.setPattern("1900 2999");
+                            }
+                        }
                         System.out.println("\t" + "Selection is reset. All tracks in the database are selected.");
                     }
                     // end of MenuItem id=4

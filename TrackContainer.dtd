@@ -1,7 +1,0 @@
-<!ELEMENT TrackContainer (Track+)>
-<!ELEMENT Track (Title,Writer,Performer,Duration,Year)>
-<!ELEMENT Title (#PCDATA)>
-<!ELEMENT Writer (#PCDATA)>
-<!ELEMENT Performer (#PCDATA)>
-<!ELEMENT Duration (#PCDATA)>
-<!ELEMENT Year (#PCDATA)>
